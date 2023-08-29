@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>测试打包后的datav</title>
+  </head>
+  <body>
+    <div id="app">
+      <dv-border-box-1 :color="['red', 'green']" backgroundColor="blue">dv-border-box-1</dv-border-box-1>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="module">
+      import datav from "./dist/datav.map.vue.esm.js";
+      console.log(datav);
+      console.log(Vue);
+      const { createApp } = Vue;
+      const app = createApp({
+        el: "#app",
+      });
+      app.use(datav);
+    </script>
+  </body>
+</html>

@@ -4,7 +4,6 @@
   "author": "JiaMing <743192023@qq.com>",
   "description": "Vue Large screen data display component library",
   "main": "lib/index.js",
-  "module": "dist/datav.map.vue.esm.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/DataV-Team/DataV.git"
@@ -37,7 +36,6 @@
     "@babel/preset-env": "^7.5.5",
     "@jiaminghi/fs": "0.0.1",
     "ftp": "^0.3.10",
-    "rollup": "^3.28.1",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
