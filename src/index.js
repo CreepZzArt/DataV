@@ -1,51 +1,51 @@
 /**
  * export {default as COMPONENTS}
  */
-export { default as fullScreenContainer } from "./components/fullScreenContainer/index";
-export { default as loading } from "./components/loading/index";
+import fullScreenContainer from "./components/fullScreenContainer/index";
+import loading from "./components/loading/index";
 
 // border box
-export { default as borderBox1 } from "./components/borderBox1/index";
-export { default as borderBox2 } from "./components/borderBox2/index";
-export { default as borderBox3 } from "./components/borderBox3/index";
-export { default as borderBox4 } from "./components/borderBox4/index";
-export { default as borderBox5 } from "./components/borderBox5/index";
-export { default as borderBox6 } from "./components/borderBox6/index";
-export { default as borderBox7 } from "./components/borderBox7/index";
-export { default as borderBox8 } from "./components/borderBox8/index";
-export { default as borderBox9 } from "./components/borderBox9/index";
-export { default as borderBox10 } from "./components/borderBox10/index";
-export { default as borderBox11 } from "./components/borderBox11/index";
-export { default as borderBox12 } from "./components/borderBox12/index";
-export { default as borderBox13 } from "./components/borderBox13/index";
+import borderBox1 from "./components/borderBox1/index";
+import borderBox2 from "./components/borderBox2/index";
+import borderBox3 from "./components/borderBox3/index";
+import borderBox4 from "./components/borderBox4/index";
+import borderBox5 from "./components/borderBox5/index";
+import borderBox6 from "./components/borderBox6/index";
+import borderBox7 from "./components/borderBox7/index";
+import borderBox8 from "./components/borderBox8/index";
+import borderBox9 from "./components/borderBox9/index";
+import borderBox10 from "./components/borderBox10/index";
+import borderBox11 from "./components/borderBox11/index";
+import borderBox12 from "./components/borderBox12/index";
+import borderBox13 from "./components/borderBox13/index";
 
 // decoration
-export { default as decoration1 } from "./components/decoration1/index";
-export { default as decoration2 } from "./components/decoration2/index";
-export { default as decoration3 } from "./components/decoration3/index";
-export { default as decoration4 } from "./components/decoration4/index";
-export { default as decoration5 } from "./components/decoration5/index";
-export { default as decoration6 } from "./components/decoration6/index";
-export { default as decoration7 } from "./components/decoration7/index";
-export { default as decoration8 } from "./components/decoration8/index";
-export { default as decoration9 } from "./components/decoration9/index";
-export { default as decoration10 } from "./components/decoration10/index";
-export { default as decoration11 } from "./components/decoration11/index";
-export { default as decoration12 } from "./components/decoration12/index";
+import decoration1 from "./components/decoration1/index";
+import decoration2 from "./components/decoration2/index";
+import decoration3 from "./components/decoration3/index";
+import decoration4 from "./components/decoration4/index";
+import decoration5 from "./components/decoration5/index";
+import decoration6 from "./components/decoration6/index";
+import decoration7 from "./components/decoration7/index";
+import decoration8 from "./components/decoration8/index";
+import decoration9 from "./components/decoration9/index";
+import decoration10 from "./components/decoration10/index";
+import decoration11 from "./components/decoration11/index";
+import decoration12 from "./components/decoration12/index";
 
 // charts
-export { default as charts } from "./components/charts/index";
+import charts from "./components/charts/index";
 
-export { default as activeRingChart } from "./components/activeRingChart";
-export { default as capsuleChart } from "./components/capsuleChart";
-export { default as waterLevelPond } from "./components/waterLevelPond/index";
-export { default as percentPond } from "./components/percentPond/index";
-export { default as flylineChart } from "./components/flylineChart";
-export { default as flylineChartEnhanced } from "./components/flylineChartEnhanced";
-export { default as conicalColumnChart } from "./components/conicalColumnChart";
-export { default as digitalFlop } from "./components/digitalFlop";
-export { default as scrollBoard } from "./components/scrollBoard/index";
-export { default as scrollRankingBoard } from "./components/scrollRankingBoard/index";
+import activeRingChart from "./components/activeRingChart";
+import capsuleChart from "./components/capsuleChart";
+import waterLevelPond from "./components/waterLevelPond/index";
+import percentPond from "./components/percentPond/index";
+import flylineChart from "./components/flylineChart";
+import flylineChartEnhanced from "./components/flylineChartEnhanced";
+import conicalColumnChart from "./components/conicalColumnChart";
+import digitalFlop from "./components/digitalFlop";
+import scrollBoard from "./components/scrollBoard/index";
+import scrollRankingBoard from "./components/scrollRankingBoard/index";
 
 /**
  * USE COMPONENTS
@@ -97,3 +97,44 @@ export default function (Vue) {
   Vue.use(scrollBoard);
   Vue.use(scrollRankingBoard);
 }
+export {
+  fullScreenContainer,
+  loading,
+  borderBox1,
+  borderBox2,
+  borderBox3,
+  borderBox4,
+  borderBox5,
+  borderBox6,
+  borderBox7,
+  borderBox8,
+  borderBox9,
+  borderBox10,
+  borderBox11,
+  borderBox12,
+  borderBox13,
+  decoration1,
+  decoration2,
+  decoration3,
+  decoration4,
+  decoration5,
+  decoration6,
+  decoration7,
+  decoration8,
+  decoration9,
+  decoration10,
+  decoration11,
+  decoration12,
+  charts,
+  activeRingChart,
+  capsuleChart,
+  waterLevelPond,
+  percentPond,
+  flylineChart,
+  flylineChartEnhanced,
+  conicalColumnChart,
+  digitalFlop,
+  scrollBoard,
+  scrollRankingBoard
+};
+

@@ -7,18 +7,33 @@
   </head>
   <body>
     <div id="app">
-      <dv-border-box-1 :color="['red', 'green']" backgroundColor="blue">dv-border-box-1</dv-border-box-1>
+      <dv-border-box-1 v-if="show">dv-border-box-1</dv-border-box-1>
+      <!-- <DvBorderBox1>dv-border-box-1</DvBorderBox1> -->
+      <button @click="toggleShow">button</button>
+      <div>{{msg}}</div>
     </div>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.min.js"></script>
     <script type="module">
       import datav from "./dist/datav.map.vue.esm.js";
-      console.log(datav);
-      console.log(Vue);
-      const { createApp } = Vue;
+
+      const { createApp, ref } = Vue;
+
       const app = createApp({
-        el: "#app",
+        setup(props) {
+          const msg = ref("vue2");
+          const show = ref(false);
+
+          const toggleShow = () => {
+            show.value = !show.value;
+          };
+          return { show, msg, toggleShow };
+        }
       });
-      app.use(datav);
+      console.log(datav);
+      datav(app);
+      app.mount("#app");
+      console.log(app);
     </script>
   </body>
 </html>
+
