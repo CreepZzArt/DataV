@@ -13,8 +13,10 @@
       <div>{{msg}}</div>
     </div>
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.min.js"></script>
-    <script type="module">
-      import datav from "./dist/datav.map.vue.esm.js";
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.8/vue.min.js"></script> -->
+    <script src="./dist/datav.map.vue.js"></script>
+    <script>
+      console.log(datav);
 
       const { createApp, ref } = Vue;
 
@@ -27,13 +29,11 @@
             show.value = !show.value;
           };
           return { show, msg, toggleShow };
-        }
+        },
       });
-      console.log(datav);
       datav(app);
       app.mount("#app");
       console.log(app);
     </script>
   </body>
 </html>
-

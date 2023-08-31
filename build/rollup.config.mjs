@@ -3,7 +3,6 @@ import vue from "rollup-plugin-vue";
 import commonjs from "rollup-plugin-commonjs";
 import babel from "rollup-plugin-babel";
 import postcss from "rollup-plugin-postcss";
-import less from "rollup-plugin-less";
 
 export default [
   {
@@ -13,55 +12,63 @@ export default [
       file: "dist/datav.map.vue.js",
       name: "datav",
       globals: {
-        vue: "Vue"
-      }
+        // vue包: 全局变量名 window.Vue
+        vue: "Vue",
+      },
     },
     plugins: [
-      vue(),
+      // rollup-plugin-vue 6.0.0版本 插件必须放在第一,需要postcss插件处理,sfc使用less,需安装less
+      vue({
+        preprocessStyles: true,
+      }),
       resolve(),
-      // babel({
-      //   exclude: "node_modules/**"
-      // }),
+      babel({
+        exclude: "node_modules/**",
+      }),
       commonjs(),
-      postcss()
+      postcss(),
     ],
-    external: ["Vue"]
+    external: ["vue"],
   },
   {
     input: "build/esm.entry.js",
     output: {
       format: "esm",
       file: "dist/datav.map.vue.esm.js",
-      name: "datav"
+      name: "datav",
     },
     plugins: [
-      vue(),
+      vue({
+        preprocessStyles: true,
+      }),
       postcss(),
       resolve(),
       babel({
-        exclude: "node_modules/**"
+        exclude: "node_modules/**",
       }),
-      commonjs()
+      commonjs(),
     ],
-    external: ["vue"]
+    external: ["vue"],
   },
   {
     input: "build/cjs.entry.js",
     output: {
       format: "cjs",
       file: "dist/datav.map.vue.cjs.js",
-      name: "datav"
+      name: "datav",
+      exports: "named",
     },
     plugins: [
-      vue(),
+      vue({
+        preprocessStyles: true,
+      }),
       postcss(),
       resolve(),
       babel({
-        exclude: "node_modules/**"
+        exclude: "node_modules/**",
       }),
-      commonjs()
+      commonjs(),
     ],
-    external: ["vue"]
-  }
+    external: ["vue"],
+  },
 ];
-
