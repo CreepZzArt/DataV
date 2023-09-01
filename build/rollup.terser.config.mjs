@@ -9,52 +9,49 @@ import { terser } from "rollup-plugin-terser";
 const bundleFormats = ["umd", "esm", "cjs"];
 const vueVersions = ["vue2", "vue3"];
 
-const isVue3 = v => v == "vue3";
-const isUmd = v => v == "umd";
-const isCjs = v => v == "cjs";
+const isVue3 = (v) => v == "vue3";
+const isUmd = (v) => v == "umd";
+const isCjs = (v) => v == "cjs";
+const isIife = (v) => v == "iife";
 const getRollupConfig = (bundleFormat, vueVersion = "vue2") => {
   const vuePlugin = isVue3(vueVersion) ? vue : vue2;
   return {
-    input: `build/${
-      isVue3(vueVersion) ? "vue3-entry" : ""
-    }/entry.${bundleFormat}.js`,
+    input: `build/${isVue3(vueVersion) ? "vue3-entry" : ""}/entry.${bundleFormat}.js`,
     output: {
       format: bundleFormat,
-      file: `dist/${isVue3(vueVersion) ? "vue3/" : ""}datav.min.vue.${
-        isUmd(bundleFormat) ? "" : bundleFormat + "."
-      }js`,
+      file: `dist/${isVue3(vueVersion) ? "vue3/" : ""}datav.min.vue.${isUmd(bundleFormat) ? "" : bundleFormat + "."}js`,
       name: "datav",
-      ...(isUmd(bundleFormat)
+      ...(isUmd(bundleFormat) || isIife(bundleFormat)
         ? {
             globals: {
               // 模块名: 变量名
-              vue: "Vue"
-            }
+              vue: "Vue",
+            },
           }
         : {}),
-      ...(isCjs(bundleFormat) ? { exports: "named" } : {})
+      ...(isCjs(bundleFormat) ? { exports: "named" } : {}),
     },
     plugins: [
       // rollup-plugin-vue 6.0.0版本 插件必须放在第一,需要postcss插件处理,sfc使用less,需安装less
       vuePlugin({
-        preprocessStyles: true
+        preprocessStyles: true,
       }),
       resolve(),
       babel({
-        exclude: "node_modules/**"
+        exclude: "node_modules/**",
       }),
       commonjs(),
       postcss(),
-      terser()
+      terser(),
     ],
     // 外部包
-    external: ["vue"]
+    external: ["vue"],
   };
 };
 
 const configs = [];
-bundleFormats.forEach(format => {
-  vueVersions.forEach(vueVersion => {
+bundleFormats.forEach((format) => {
+  vueVersions.forEach((vueVersion) => {
     const config = getRollupConfig(format, vueVersion);
     configs.push(config);
   });
@@ -201,4 +198,3 @@ export default configs;
 //     external: ["vue"]
 //   }
 // ];
-

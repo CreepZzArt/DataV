@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'vue'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.datav = {}, global.Vue));
-})(this, (function (exports, vue) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('vue')) :
+  typeof define === 'function' && define.amd ? define(['vue'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.datav = factory(global.Vue));
+})(this, (function (vue) { 'use strict';
 
   function randomExtend(minNum, maxNum) {
     if (arguments.length === 1) {
@@ -19501,7 +19501,7 @@
   /**
    * USE COMPONENTS
    */
-  function index (Vue) {
+  function datav (Vue) {
     Vue.use(fullScreenContainer);
     Vue.use(loading);
 
@@ -19548,8 +19548,6 @@
     Vue.use(scrollRankingBoard);
   }
 
-  exports.datav = index;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
+  return datav;
 
 }));

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>测试打包后的datav</title>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="toggleShow">toggle</button>
+      <dv-border-box-1 style="width: 300px; height: 200px" v-if="show"></dv-border-box-1>
+    </div>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.min.js"></script> -->
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.8/vue.min.js"></script> -->
+    <!-- <script src="../dist/vue3/datav.map.vue.js"></script> -->
+    <script type="module">
+      // import { createApp, ref } from "https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.min.js";
+      // import "https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.min.js";
+      // import "../dist/vue3/datav.map.vue.js";
+      import("https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.min.js").then(() => {
+        console.log(Vue);
+
+        import("../dist/vue3/datav.map.vue.js").then((datav) => {
+          console.log(datav);
+          console.log(Vue);
+        });
+      });
+      // const { createApp, ref } = Vue;
+      // const app = createApp({
+      //   setup(props) {
+      //     const msg = ref("vue2");
+      //     const show = ref(false);
+
+      //     const toggleShow = () => {
+      //       show.value = !show.value;
+      //     };
+      //     return { show, msg, toggleShow };
+      //   },
+      // });
+      // datav(app);
+      // app.mount("#app");
+      // console.log(app);
+    </script>
+  </body>
+</html>

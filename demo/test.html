@@ -6,7 +6,32 @@
     <title>测试打包后的datav</title>
   </head>
   <body>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="../dist/datav.map.vue.esm.js" type="module"></script>
+    <div id="app">
+      <button @click="toggleShow">toggle</button>
+      <dv-border-box-1 style="width: 300px; height: 200px" v-if="show"></dv-border-box-1>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.min.js"></script>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.8/vue.min.js"></script> -->
+    <script src="../dist/vue3/datav.map.vue.js"></script>
+    <script>
+      console.log(datav);
+
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup(props) {
+          const msg = ref("vue2");
+          const show = ref(false);
+
+          const toggleShow = () => {
+            show.value = !show.value;
+          };
+          return { show, msg, toggleShow };
+        },
+      });
+      datav(app);
+      app.mount("#app");
+      console.log(app);
+    </script>
   </body>
 </html>

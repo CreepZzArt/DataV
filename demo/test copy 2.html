@@ -7,14 +7,12 @@
   </head>
   <body>
     <div id="app">
-      <dv-border-box-1 v-if="show">dv-border-box-1</dv-border-box-1>
-      <!-- <DvBorderBox1>dv-border-box-1</DvBorderBox1> -->
-      <button @click="toggleShow">button</button>
-      <div>{{msg}}</div>
+      <button @click="toggleShow">toggle</button>
+      <dv-border-box-1 style="width: 300px; height: 200px" v-if="show"></dv-border-box-1>
     </div>
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.min.js"></script>
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.8/vue.min.js"></script> -->
-    <script src="./dist/datav.map.vue.js"></script>
+    <script src="../dist/vue3/datav.map.vue.js"></script>
     <script>
       console.log(datav);
 
