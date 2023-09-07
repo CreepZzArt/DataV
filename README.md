@@ -81,6 +81,47 @@ Demo 页面使用了全屏组件，请 F11 全屏后查看。
 基于 DataV 2.10.0 版本的打包改动
 由于 vue3 兼容 vue2 option API,且 datav 源码采用的 vue2api 在 vue3 中也兼容,改动内容如下
 
-- decoration3 和 decoration6 组件源码里将 template 的 v-for 绑定在 rect 上
-- 增加了打包成 esm 格式,将依赖其余的库如@jiaminghi/charts 也打包进去(为了在 vite 中可以直接将使用 esm 格式,如果不打包,由于依赖的其他库作者是打包成 umd 模块,在开发过程中 vite 需要单独配置这些依赖或者单独引入才能进行依赖预购建成 esm 模块)
-- 修改了 rollup.config.mjs 和 rollup.terse 人.config.mjs 中的配置,增加了 esm.entry.js 入口文件,
+1. `decoration3` 和 `decoration6` 组件源码里将 `template` 的 `v-for` 绑定在 `rect` 上
+2. 增加了打包成 `esm`,`iife`,`cjs` 格式,将依赖其余的库如`@jiaminghi/charts` 也打包进去(为了在 `vite` 中可以直接将使用 `esm` 格式,如果不打包,由于依赖的其他库作者是打包成 umd 模块,在开发过程中 vite 需要单独配置这些依赖或者单独引入才能进行依赖预购建成 esm 模块)
+3. 修改了 rollup.config.mjs 和 rollup.terse 人.config.mjs 中的配置,增加了`esm`,`iife`,`cjs`入口文件,
+
+## Vue2 版使用方式
+
+和原来一样,只不过包名变成@iamzzg/data-view
+
+## Vue3 版使用方式
+
+`datav` 打包成 `vue3` 的版本在 `dist/vue3` 文件夹下
+
+1. `umd` 使用方式
+   未托管到 cdn,可以直接复制`dist/vue3/datav.map.vue.js`
+
+```html
+<script src="dist/vue3/datav.map.vue.js"></script>
+<script>
+  // app是createApp()的返回值
+  app.use(datav);
+</script>
+```
+
+2. `esm` 使用方式
+   安装
+
+```bash
+npm i @iamzzg/data-view
+```
+
+全局注册
+
+```js
+import datav from "@iamzzg/data-view/dist/vue3/datav.map.vue.esm";
+
+app.use(datav);
+```
+
+按需导入,和 vue2 方式一致
+
+```js
+import { borderBox1 } from "@iamzzg/data-view/dist/vue3/datav.map.vue.esm";
+app.use(borderBox1);
+```

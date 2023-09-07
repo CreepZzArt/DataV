@@ -1,13 +1,13 @@
 {
-  "name": "@jiaminghi/data-view",
+  "name": "@iamzzg/data-view",
   "version": "2.10.0",
-  "author": "JiaMing <743192023@qq.com>",
+  "author": "Dragon <785864219@qq.com>",
   "description": "Vue Large screen data display component library",
   "main": "lib/index.js",
   "module": "dist/datav.map.vue.esm.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DataV-Team/DataV.git"
+    "url": "https://github.com/iamzzg/DataV.git"
   },
   "scripts": {
     "build": "node build/index.js",
@@ -18,7 +18,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DataV-Team/DataV/issues"
+    "url": "https://github.com/iamzzg/DataV/issues"
   },
   "keywords": [
     "vue",
@@ -30,7 +30,7 @@
     "@babel/runtime": "^7.5.5",
     "@jiaminghi/charts": "*"
   },
-  "homepage": "https://github.com/DataV-Team/DataV#readme",
+  "homepage": "https://github.com/iamzzg/DataV#readme",
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
