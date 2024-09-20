@@ -280,8 +280,8 @@ export default {
         let backgroundColor = i % 2 === 0 ? this.mergedConfig.evenRowBGC : this.mergedConfig.oddRowBGC
         // 如果otherRowBGC数组中对应当前行的值为true，则使用otherRowColor
         if (otherRowBGC[i]) {  // 判断otherRowBGC中当前索引的值是否为true
-               console.log('otherRowBGC[i] is true')
           backgroundColor = otherRowColor || backgroundColor  // 如果otherRowColor存在则使用，否则使用默认颜色
+          console.log(backgroundColor,'otherRowBGC[i] is true')
         }
 
         return {
