@@ -28,6 +28,7 @@
           height: ${heights[ri]}px;
           line-height: ${heights[ri]}px;
           background-color: ${row.backgroundColor};
+          border: ${row.border};
         `"
       >
         <div
@@ -274,20 +275,20 @@ export default {
         })
       }
 
-      console.log('otherRowBGC[i] is true')
       // 遍历数据，根据otherRowBGC和奇偶行规则动态设置背景色
       data = data.map((ceils, i) => {
         let backgroundColor = i % 2 === 0 ? this.mergedConfig.evenRowBGC : this.mergedConfig.oddRowBGC
+        const border = otherRowBGC[i] ? '2px solid #4e8dc4' : 'none';  // 添加描边样式
         // 如果otherRowBGC数组中对应当前行的值为true，则使用otherRowColor
         if (otherRowBGC[i]) {  // 判断otherRowBGC中当前索引的值是否为tru
           backgroundColor = otherRowColor || backgroundColor  // 如果otherRowColor存在则使用，否则使用默认颜色
-          console.log(backgroundColor,'otherRowBGC[i] is true')
         }
 
         return {
           ceils,
           rowIndex: i,
-          backgroundColor
+          backgroundColor,
+          border
         }
       })
 
