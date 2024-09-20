@@ -25,8 +25,7 @@
         v-for="(row, ri) in rows"
         :key="`${row.toString()}${row.scroll}`"
         :style="`
-          height: ${heights[ri]}px;
-          line-height: ${heights[ri]}px;
+          ${shouldHideRow(ri) ? '' : `height: ${heights[ri]}px; line-height: ${heights[ri]}px;`}
           background-color: ${row.backgroundColor};
           border: ${row.border};
         `"
@@ -196,6 +195,11 @@ export default {
     }
   },
   methods: {
+    shouldHideRow (index) {
+      // 在这里根据你的逻辑判断是否需要隐藏该行。
+      // 例如，如果 index 大于某个值就隐藏
+      return index >= this.rowsData.length;
+    },
     handleHover(enter, ri, ci, row, ceil){
       const { mergedConfig, emitEvent, stopAnimation, animation } = this
 
