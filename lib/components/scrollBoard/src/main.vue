@@ -262,22 +262,34 @@ export default {
 
       this.header = header
     },
-    calcRowsData () {
-      let { data, index, headerBGC, rowNum } = this.mergedConfig
+        calcRowsData () {
+      let { data, index, headerBGC, rowNum, otherRowBGC, otherRowColor } = this.mergedConfig
 
       if (index) {
         data = data.map((row, i) => {
           row = [...row]
-
           const indexTag = `<span class="index" style="background-color: ${headerBGC};">${i + 1}</span>`
-
           row.unshift(indexTag)
-
           return row
         })
       }
 
-      data = data.map((ceils, i) => ({ ceils, rowIndex: i }))
+      console.log('otherRowBGC[i] is true')
+      // 遍历数据，根据otherRowBGC和奇偶行规则动态设置背景色
+      data = data.map((ceils, i) => {
+        let backgroundColor = i % 2 === 0 ? this.mergedConfig.evenRowBGC : this.mergedConfig.oddRowBGC
+        // 如果otherRowBGC数组中对应当前行的值为true，则使用otherRowColor
+        if (otherRowBGC[i]) {  // 判断otherRowBGC中当前索引的值是否为true
+               console.log('otherRowBGC[i] is true')
+          backgroundColor = otherRowColor || backgroundColor  // 如果otherRowColor存在则使用，否则使用默认颜色
+        }
+
+        return {
+          ceils,
+          rowIndex: i,
+          backgroundColor
+        }
+      })
 
       const rowLength = data.length
 
