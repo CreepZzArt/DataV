@@ -27,7 +27,7 @@
         :style="`
           height: ${heights[ri]}px;
           line-height: ${heights[ri]}px;
-          background-color: ${mergedConfig[row.rowIndex % 2 === 0 ? 'evenRowBGC' : 'oddRowBGC']};
+          background-color: ${row.backgroundColor};
         `"
       >
         <div
