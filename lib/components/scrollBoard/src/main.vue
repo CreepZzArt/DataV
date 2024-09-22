@@ -29,7 +29,8 @@
           line-height: ${heights[ri]}px;
           background-color: ${row.backgroundColor};
           border: ${row.border};
-          display: ${displays[ri]};  // 使用显示状态
+          opacity: ${opacity[ri]};  // 使用透明度
+          transition: opacity 0.5s ease-in-out;  // 添加过渡效果
         `"
       >
         <div
@@ -290,7 +291,7 @@ export default {
       rowIndex: i,
       backgroundColor,
       border,
-      display: 'flex'  // 初始化显示状态
+      opacity: 1  // 初始化透明度为1
     };
   });
 
@@ -304,7 +305,7 @@ export default {
 
   this.rowsData = data;
   this.rows = data;
-  this.displays = data.map(() => 'flex'); // 初始化显示状态数组
+  this.opacity = data.map(() => 1); // 初始化透明度数组
 },
     calcWidths () {
       const { width, mergedConfig, rowsData } = this
@@ -387,7 +388,7 @@ export default {
 
   this.heights.splice(0, animationNum, ...new Array(animationNum).fill(0));
 
-  this.displays.splice(0, animationNum, ...new Array(animationNum).fill('none')); // 更新显示状态
+  this.opacity.splice(0, animationNum, ...new Array(animationNum).fill(0)); // 更新透明度为0
 
   animationIndex += animationNum;
 
