@@ -30,7 +30,7 @@
           background-color: ${row.backgroundColor};
           border: ${row.border};
           opacity: ${opacity[ri]};  // 使用透明度
-          transition: opacity 0.5s ease-in-out;  // 添加过渡效果
+          transition: opacity 1.5s ease-in-out;  // 添加过渡效果
         `"
       >
         <div
