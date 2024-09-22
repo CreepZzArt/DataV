@@ -29,6 +29,7 @@
           line-height: ${heights[ri]}px;
           background-color: ${row.backgroundColor};
           border: ${row.border};
+          display: ${displays[ri]};  // 使用显示状态
         `"
       >
         <div
@@ -264,45 +265,47 @@ export default {
       this.header = header
     },
         calcRowsData () {
-      let { data, index, headerBGC, rowNum, otherRowBGC, otherRowColor } = this.mergedConfig
+  let { data, index, headerBGC, rowNum, otherRowBGC, otherRowColor } = this.mergedConfig;
 
-      if (index) {
-        data = data.map((row, i) => {
-          row = [...row]
-          const indexTag = `<span class="index" style="background-color: ${headerBGC};">${i + 1}</span>`
-          row.unshift(indexTag)
-          return row
-        })
-      }
+  if (index) {
+    data = data.map((row, i) => {
+      row = [...row];
+      const indexTag = `<span class="index" style="background-color: ${headerBGC};">${i + 1}</span>`;
+      row.unshift(indexTag);
+      return row;
+    });
+  }
 
-      // 遍历数据，根据otherRowBGC和奇偶行规则动态设置背景色
-      data = data.map((ceils, i) => {
-        let backgroundColor = i % 2 === 0 ? this.mergedConfig.evenRowBGC : this.mergedConfig.oddRowBGC
-        const border = otherRowBGC[i] ? '2px solid #4e8dc4' : 'none';  // 添加描边样式
-        // 如果otherRowBGC数组中对应当前行的值为true，则使用otherRowColor
-        if (otherRowBGC[i]) {  // 判断otherRowBGC中当前索引的值是否为tru
-          backgroundColor = otherRowColor || backgroundColor  // 如果otherRowColor存在则使用，否则使用默认颜色
-        }
+  // 遍历数据，根据otherRowBGC和奇偶行规则动态设置背景色
+  data = data.map((ceils, i) => {
+    let backgroundColor = i % 2 === 0 ? this.mergedConfig.evenRowBGC : this.mergedConfig.oddRowBGC;
+    const border = otherRowBGC[i] ? '2px solid #4e8dc4' : 'none';  // 添加描边样式
+    // 如果otherRowBGC数组中对应当前行的值为true，则使用otherRowColor
+    if (otherRowBGC[i]) {  // 判断otherRowBGC中当前索引的值是否为true
+      backgroundColor = otherRowColor || backgroundColor;  // 如果otherRowColor存在则使用，否则使用默认颜色
+    }
 
-        return {
-          ceils,
-          rowIndex: i,
-          backgroundColor,
-          border
-        }
-      })
+    return {
+      ceils,
+      rowIndex: i,
+      backgroundColor,
+      border,
+      display: 'block'  // 初始化显示状态
+    };
+  });
 
-      const rowLength = data.length
+  const rowLength = data.length;
 
-      if (rowLength > rowNum && rowLength < 2 * rowNum) {
-        data = [...data, ...data]
-      }
+  if (rowLength > rowNum && rowLength < 2 * rowNum) {
+    data = [...data, ...data];
+  }
 
-      data = data.map((d, i) => ({ ...d, scroll: i }))
+  data = data.map((d, i) => ({ ...d, scroll: i }));
 
-      this.rowsData = data
-      this.rows = data
-    },
+  this.rowsData = data;
+  this.rows = data;
+  this.displays = data.map(() => 'block'); // 初始化显示状态数组
+},
     calcWidths () {
       const { width, mergedConfig, rowsData } = this
 
@@ -349,49 +352,51 @@ export default {
 
       this.aligns = deepMerge(aligns, align)
     },
-    async animation (start = false) {
-      const { needCalc, calcHeights, calcRowsData } = this
+   async animation (start = false) {
+  const { needCalc, calcHeights, calcRowsData } = this;
 
-      if (needCalc) {
-        calcRowsData()
-        calcHeights()
-        this.needCalc = false
-      }
+  if (needCalc) {
+    calcRowsData();
+    calcHeights();
+    this.needCalc = false;
+  }
 
-      let { avgHeight, animationIndex, mergedConfig, rowsData, animation, updater } = this
+  let { avgHeight, animationIndex, mergedConfig, rowsData, animation, updater } = this;
 
-      const { waitTime, carousel, rowNum } = mergedConfig
+  const { waitTime, carousel, rowNum } = mergedConfig;
 
-      const rowLength = rowsData.length
+  const rowLength = rowsData.length;
 
-      if (rowNum >= rowLength) return
+  if (rowNum >= rowLength) return;
 
-      if (start) {
-        await new Promise(resolve => setTimeout(resolve, waitTime))
-        if (updater !== this.updater) return
-      }
+  if (start) {
+    await new Promise(resolve => setTimeout(resolve, waitTime));
+    if (updater !== this.updater) return;
+  }
 
-      const animationNum = carousel === 'single' ? 1 : rowNum
+  const animationNum = carousel === 'single' ? 1 : rowNum;
 
-      let rows = rowsData.slice(animationIndex)
-      rows.push(...rowsData.slice(0, animationIndex))
+  let rows = rowsData.slice(animationIndex);
+  rows.push(...rowsData.slice(0, animationIndex));
 
-      this.rows = rows.slice(0, carousel === 'page' ? rowNum * 2 : rowNum + 1)
-      this.heights = new Array(rowLength).fill(avgHeight)
+  this.rows = rows.slice(0, carousel === 'page' ? rowNum * 2 : rowNum + 1);
+  this.heights = new Array(rowLength).fill(avgHeight);
 
-      await new Promise(resolve => setTimeout(resolve, 300))
-      if (updater !== this.updater) return
+  await new Promise(resolve => setTimeout(resolve, 300));
+  if (updater !== this.updater) return;
 
-      this.heights.splice(0, animationNum, ...new Array(animationNum).fill(0))
+  this.heights.splice(0, animationNum, ...new Array(animationNum).fill(0));
 
-      animationIndex += animationNum
+  this.displays.splice(0, animationNum, ...new Array(animationNum).fill('none')); // 更新显示状态
 
-      const back = animationIndex - rowLength
-      if (back >= 0) animationIndex = back
+  animationIndex += animationNum;
 
-      this.animationIndex = animationIndex
-      this.animationHandler = setTimeout(animation, waitTime - 300)
-    },
+  const back = animationIndex - rowLength;
+  if (back >= 0) animationIndex = back;
+
+  this.animationIndex = animationIndex;
+  this.animationHandler = setTimeout(animation, waitTime - 300);
+},
     stopAnimation () {
       const { animationHandler, updater } = this
 
