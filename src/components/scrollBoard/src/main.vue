@@ -1,6 +1,6 @@
 <template>
   <div class="dv-scroll-board" :ref="ref">
-    <div class="header" v-if="header.length && mergedConfig" :style="`background-color: ${mergedConfig.headerBGC};`">
+    <div class="header" v-if="header.length && mergedConfig" :style="`background-color: ${mergedConfig.headerBGC};display:flex`">
       <div
         class="header-item"
         v-for="(headerItem, i) in header"
@@ -290,7 +290,7 @@ export default {
       rowIndex: i,
       backgroundColor,
       border,
-      display: 'block'  // 初始化显示状态
+      display: 'flex'  // 初始化显示状态
     };
   });
 
@@ -304,7 +304,7 @@ export default {
 
   this.rowsData = data;
   this.rows = data;
-  this.displays = data.map(() => 'block'); // 初始化显示状态数组
+  this.displays = data.map(() => 'flex'); // 初始化显示状态数组
 },
     calcWidths () {
       const { width, mergedConfig, rowsData } = this
